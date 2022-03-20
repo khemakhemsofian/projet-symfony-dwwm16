@@ -32,8 +32,7 @@
                 {% if app.user %} 
                     <a class="item" href={{path("app_logout")}} >déconnexion</a>
                     <a class="item" href={{path('mail')}}>Vos rdv</a>
-                    <a href={{path('admin')}} class="item" >Ajouter des bien ou utilisateur</a>
-                    {% endif %}             
+                    <a href={{path('admin')}} class="item" >Ajouter des bien ou utilisateur</a>           
                 {% else %}
                     <a href={{path("app_login")}} class="item"  >connexion</a>
                 {% endif %}
