@@ -31,15 +31,13 @@
 
                 {% if app.user %} 
                     <a class="item" href={{path("app_logout")}} >déconnexion</a>
-                    <a href={{path('bien')}} class="item"  >Tous nos biens</a> 
                     <a class="item" href={{path('mail')}}>Vos rdv</a>
-                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_AGENT') %}
-                        <a href={{path('admin')}} class="item" >Ajouter des bien ou utilisateur</a>
-                    {% endif %}
-                                     
+                    <a href={{path('admin')}} class="item" >Ajouter des bien ou utilisateur</a>
+                    {% endif %}             
                 {% else %}
                     <a href={{path("app_login")}} class="item"  >connexion</a>
                 {% endif %}
+                  <a href={{path('bien')}} class="item"  >Tous nos biens</a>
 
             </div>    
 
