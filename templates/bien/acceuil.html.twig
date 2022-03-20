@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-8">
+			<div class="col">
+				<h1>Bienvenue sur E-mobilier</h1>
+				<hr>
+				<p class="class-text">c'est une plateforme d'agence immobiliére avec un max de biens de qualité et a un prix avantageux(au défi de trouver mieux)</p>
+				<br>
+				<br>
+			</div>
+			<div class="col">
+                <div class="row">
+                	<div class="d-flex flex-wrap justify-content-around my-3">
+					{% for bien in pageAcceuil %}
+						<div class="card" style="width: 18rem;">
+							<img src={{asset('./upload/'~ bien.photo)}} text={{bien.title}} class="card-img-top">
+							<div class="card-body">
+								<h5 class="card-title">{{bien.title}}</h5>
+								<br>
+								<p class="class-text">Nombre de surface:
+									{{bien.surface}}</p>
+
+								<p class="card-text">Nombre de pieces:
+									{{bien.nombreDePiece}}</p>
+								<p class="card-text">{{bien.prix}}
+									$</p>
+								{% if bien.vente == false %}
+									<p class="card-text">A louer</p>
+								{% else %}
+									<p class="card-text">A vendre</p>
+								{% endif %}
+								<a href={{path('bien_single', {id:bien.id} )}} class="btn btn-primary">Voir le bien en détail</a>
+							</div>
+						</div>
+					{% else %}
+						<h2 class="text-danger">Ils n'y a pas de biens pour le moment(dsl).</h2>
+					{% endfor %}
+				</div>
+                </div>
+			
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="col">
+				<h3>
+					Notre Agence:
+					<img src="https://fakeimg.pl/500x400/" class="card-img-top">
+				</h3>
+				<div>
+					<p class="class-text">Vous pouvez nous retrouvez</p>
+					<p class="class-text">7j/7j de 9h à 21h</p>
+					<p class="class-text">Adresse de l'agence: 1 rue de notre agence</p>
+					<p class="class-text">93240,stains</p>
+					<p class="class-text">Pour nous contacter</p>
+					<p class="class-text">par mail: unmail@mail.com</p>
+					<p class="class-text">par tel: 0987654321</p>
+				</div>
+			</div>
+            <hr>
+            <div class="col">
+              <button type="button" class="btn btn-link">Appartement</button>
+              <button type="button" class="btn btn-link">Maison</button>
+              <button type="button" class="btn btn-link">Achat</button>
+              <button type="button" class="btn btn-link">Location</button>
+            </div>
+		</div>
+	</div>
+</div>{% endblock %}

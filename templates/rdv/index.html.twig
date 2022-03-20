@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div class="text-center my-3">
+		<h5 class="class-text">tous Vos rdv</h5>
+		<p class="class-text">Vous trouvez tous les rdv que vous aviez pris avec l'agent qui qui gére un bien que vous aurez choisie</p>
+			{% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{message}}</div>
+            {% endfor %}
+				<table class="col-12 table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nom du bien</th>
+                            <th>Date du RDV</th>
+                            <th>Mail du clent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for mail in mails %}
+                            <tr>
+                                <td>{{ mail.bien.title }}</td>
+                                <td>{{ mail.daterdv|date() }}</td>
+                                <td>{{ mail.email }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td class="text-danger" colspan="3">Aucun Rendez-vous n'a été pris</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+			</div>
+		</div>
+		{#renvoyer du mail (relation mail et bien pour récupérer l'agent)#}
+		{#pour l'afficher faire un mail.bien.agent.nom#}
+		<div>
+		{% endblock %}

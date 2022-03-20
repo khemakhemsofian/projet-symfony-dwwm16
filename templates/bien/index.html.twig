@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="text-center my-3">
+		<h1>Tous nos biens de notre site (que tu choix)</h1>
+		<hr>
+		<div>
+			<div class="row">
+				<div class="col">
+					<h6>Pieces min</h6>
+					<input type="number" min="0" max="9999">
+				</div>
+				<div class="col">
+					<h6>Pieces max</h6>
+					<input type="number" min="0" max="9999">
+				</div>
+				<div class="col">
+					<h6>Surface min</h6>
+					<input type="number" min="0" max="9999">
+				</div>
+				<div class="col">
+					<h6>Surface max</h6>
+					<input type="number" min="0" max="9999">
+				</div>
+				<div class="col">
+					<h6>Prix min</h6>
+					<input type="number" min="0" max="9999">
+				</div>
+				<div class="col">
+					<h6>Prix max</h6>
+					<input type="number" min="0" max="9999">
+				</div>
+			</div>
+			<div class="col">
+				<button type="button" class="btn btn-primary btn-sm">Rechercher</button>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col">
+				<a>0:Piéces</a>
+			</div>
+            <div class="col">
+				<a>0:Surface</a>
+			</div>
+            <div class="col">
+				<a>0:Prix</a>
+			</div>
+		</div>
+        <br>
+        <div class="d-flex flex-wrap justify-content-around my-3">
+{% for bien in bienList %}
+    <div class="card" style="width: 18rem;">
+     <img src={{asset('./upload/'~bien.photo)}} text={{bien.title}} class="card-img-top">
+      <div class="card-body">
+                <h5 class="card-title">{{bien.title}}</h5>    
+                <br>
+                <p class="class-text">Nombre de surface: {{bien.surface}}</p>
+                
+                <p class="card-text">Nombre de pieces: {{bien.nombreDePiece}}</p>
+                <p class="card-text">{{bien.prix}} $ </p>
+                {% if bien.vente == false %}
+                <p class="card-text">A louer</p>
+                {% else %} 
+                <p class="card-text">A vendre</p>
+                 {% endif %}
+                  <a href={{path('bien_single', {id:bien.id})}} class="btn btn-primary">Voir le bien en détail</a>
+            </div>
+    </div>
+{% else %}
+     <h2 class="text-danger">Ils n'y a pas de biens pour le moment(dsl).</h2>
+{% endfor %}
+</div>
+ {% endblock %}

@@ -1,0 +1,116 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div class="text-center my-3">
+		<div class="row">
+			<div class="col">
+				{% if bien.photo %}
+					<img src={{asset('upload/'~bien.photo)}} text={{bien.title}} class="card-img-top">
+				{% else %}
+					
+					<h2 class="text-danger">Ce bien n'a pas de photos(dsl).</h2>
+				{% endif %}
+			</div>
+				<div class="col">
+			  		{{ form_start(form) }}
+						{{ form_widget(form.nom, {'attr' : {'class' : 'form-control', 'placeholder' : 'nom'}}) }} 
+						<br>
+						{{ form_widget(form.prenom, {'attr' : {'class' : 'form-control', 'placeholder' : 'prenom'}}) }} 
+						<br>
+						{{ form_widget(form.email, {'attr' : {'class' : 'form-control', 'placeholder' : 'votre email'}}) }}
+						<br>
+						{{ form_widget(form.num_tel, {'attr' : {'class' : 'form-control', 'placeholder' : 'ton numéro de tel'}}) }}
+						<br>
+				    	{{ form_widget(form.daterdv, {'attr' : {'class' : 'form-control', 'placeholder' : 'date de rdv'}}) }}
+						<br>
+					    <button type="submit" class="btn btn-primary">Prendre Un RDV</button>
+				    {{ form_end(form) }}
+				</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col">
+				<p class="h4" style="color:#0d6efd">{{bien.title}}</p>
+				<p class="class-text">{{bien.description}}</p>
+				{% if bien.lesimages is not empty %}
+					{% for item in bien.lesimages %}
+						<img src={{asset('upload/'~ item.nomimage)}} class="card-img-top">
+					{% endfor %}
+				{% else %}
+					<h2 class="text-danger">Ce bien n'a pas de photos secondaire(dsl).</h2>
+				{% endif %}
+			</div>
+			<div class="col">
+				{% if bien.vente == false %}
+					<p class="h4" style="color:#0d6efd">A louer</p>
+				{% else %}
+					<p class="h4" style="color:#0d6efd">A vendre</p>
+				{% endif %}
+				<h3>
+					Type:
+					{% if bien.type == false %}
+					<small class="text-muted">Appartement</small>
+					{% else %}
+					<small class="text-muted">Maison</small>
+					{% endif %}
+				</h3>
+				<h3>
+					Surface:
+					<small class="text-muted">{{bien.surface}}M²</small>
+				</h3>
+				<h3>
+					Taille-du-terrain:
+					<small class="text-muted">
+						{% if bien.tailleDuTerrain == "" %}
+							N/A
+						{% else %}
+							{{bien.tailleDuTerrain}}
+						{% endif %}
+					</small>
+				</h3>
+				<h3>
+					Nombre-de-piéce(s):
+					<small class="text-muted">
+						{% if bien.nombreDePiece == 0 %}
+							N/A
+						{% else %}
+							{{bien.nombreDePiece}}
+						{% endif %}
+					</small>
+				</h3>
+				<h3>
+					Etage:
+					<small class="text-muted">
+						{% if bien.etage == 0 %}
+							RDC(rez-de-chaussée)
+						{% else %}
+							{{bien.etage}}
+						{% endif %}
+					</small>
+				</h3>
+				<h3 style="color:#0d6efd">
+					Adresse:
+					<small class="text" style="color:#0d6efd">
+						{{bien.Adresse}}</small>
+				</h3>
+				<h3>
+					Prix:
+					<small class="text-muted">{{bien.prix}}$</small>
+				</h3>
+				<h3>
+					Date de contruction:
+					<small class="text-muted">{{bien.DateDeConstruction|date("d/m/y")}}</small>
+				</h3>
+				<h3>
+					Liste des options:
+					{% for options in bien.options %}
+						<small class="text-muted">{{options.name}}</small>	
+					{% else %}
+						<small class="text-danger">Pas options pour ce bien</small>
+					{% endfor %}
+				</h3>
+			</div>
+		</div>
+		<hr>
+	</div>
+{% endblock %}
